@@ -1,0 +1,262 @@
+/*
+ * global.css — Styles de base partagés par toutes les pages
+ * ─────────────────────────────────────────────────────────────
+ * Contient :
+ *   1. Variables CSS (couleurs, typo, espacements, ombres)
+ *   2. Reset minimal
+ *   3. Classes utilitaires globales (reveal, btn, etc.)
+ *   4. Styles de la navbar (hover des liens)
+ * ─────────────────────────────────────────────────────────────
+ */
+
+/* ══════════════════════════════════════════════════════════
+   1. VARIABLES CSS
+══════════════════════════════════════════════════════════ */
+:root {
+  /* Palette de couleurs principale */
+  --orange:        #F97316;
+  --orange-dark:   #C2570B;
+  --orange-light:  rgba(249, 115, 22, 0.12);
+  --dark:          #111111;
+  --mid:           #2A2A2A;
+  --light:         #F5F3EE;
+  --white:         #FFFFFF;
+  --gray:          #6B7280;
+  --gray-light:    #9CA3AF;
+  --border:        #E5E1D8;
+
+  /* Typographie */
+  --serif:  'Playfair Display', Georgia, serif;
+  --sans:   'DM Sans', sans-serif;
+
+  /* Espacements cohérents */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+
+  /* Rayons de bordure */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Ombres */
+  --shadow-sm: 0 2px 8px  rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.12);
+  --shadow-orange: 0 6px 24px rgba(249, 115, 22, 0.32);
+
+  /* Transitions */
+  --transition: 0.22s cubic-bezier(.22, 1, .36, 1);
+  --transition-slow: 0.55s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. RESET MINIMAL
+══════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;       /* Défilement doux au clic sur ancres */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--sans);
+  background-color: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+  overflow-x: hidden;            /* Empêche le scroll horizontal parasite */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: var(--sans);
+  cursor: pointer;
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. CLASSES UTILITAIRES GLOBALES
+══════════════════════════════════════════════════════════ */
+
+/* ── Animations au scroll (utilisées sur toutes les pages) ── */
+
+/*
+ * .reveal : état initial (invisible, décalé vers le bas)
+ * .reveal.visible : état final (visible, en place)
+ * Déclenché par IntersectionObserver dans main.js
+ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity  0.72s cubic-bezier(.22, 1, .36, 1),
+    transform 0.72s cubic-bezier(.22, 1, .36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cascade de délais pour les groupes d'éléments */
+.reveal-group > *:nth-child(1) { transition-delay: 0.00s; }
+.reveal-group > *:nth-child(2) { transition-delay: 0.08s; }
+.reveal-group > *:nth-child(3) { transition-delay: 0.16s; }
+.reveal-group > *:nth-child(4) { transition-delay: 0.24s; }
+.reveal-group > *:nth-child(5) { transition-delay: 0.32s; }
+.reveal-group > *:nth-child(6) { transition-delay: 0.40s; }
+.reveal-group > *:nth-child(7) { transition-delay: 0.48s; }
+.reveal-group > *:nth-child(8) { transition-delay: 0.56s; }
+
+/* ── Boutons globaux ───────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  padding: 0.9rem 2.2rem;
+  border-radius: var(--radius-md);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-orange);
+}
+
+.btn-primary:hover {
+  background: var(--orange-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(249, 115, 22, 0.42);
+}
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--dark);
+  padding: 0.9rem 2.2rem;
+  border-radius: var(--radius-md);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.btn-outline:hover {
+  border-color: var(--orange);
+  background: var(--orange-light);
+  color: var(--orange);
+}
+
+/* ── Section layout commun ─────────────────────────────── */
+.section-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section-eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.section-title span { color: var(--orange); }
+
+.section-divider {
+  width: 48px;
+  height: 4px;
+  background: var(--orange);
+  border-radius: 4px;
+  margin: 1.2rem 0 2rem;
+}
+
+/* ── Badges de statut ──────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge-open   { background: rgba(22, 163, 74, 0.12); color: #16a34a; border: 1px solid rgba(22,163,74,.25); }
+.badge-closed { background: rgba(220, 38, 38, 0.10); color: #DC2626; border: 1px solid rgba(220,38,38,.25); }
+.badge-new    { background: rgba(249,115,22, 0.12);  color: var(--orange); border: 1px solid rgba(249,115,22,.25); }
+
+/* ── Hover link souligné ───────────────────────────────── */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 2px;
+  background: var(--orange);
+  border-radius: 2px;
+  transition: width var(--transition);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* ══════════════════════════════════════════════════════════
+   4. ACCESSIBILITÉ
+══════════════════════════════════════════════════════════ */
+
+/* Focus visible pour la navigation au clavier */
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Masquage accessible (screen readers uniquement) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,583 @@
+/*
+ * responsive-shop-detail.css — Adaptation responsive de Shop-detail.php
+ * ═══════════════════════════════════════════════════════════════════════
+ * Breakpoints (cohérents avec responsive-home.css) :
+ *   ≤ 480px   → Très petit mobile
+ *   ≤ 640px   → Mobile standard
+ *   ≤ 768px   → Grand mobile / petite tablette
+ *   ≤ 1024px  → Tablette / petit laptop
+ *   ≤ 1200px  → Laptop standard
+ *   ≥ 1400px  → Grand écran
+ *
+ * Spécificités de cette page :
+ *   - Barre de filtres sticky : doit scroller horizontalement sur mobile
+ *   - Grille produits : 4 → 3 → 2 → 1 selon la largeur
+ *   - Overlay produit : toujours lisible quelle que soit la taille
+ *   - Hero boutique  : avatar + texte empilés sur mobile
+ *   - Encart vendeur : empilé sur mobile
+ * ═══════════════════════════════════════════════════════════════════════
+ */
+
+
+/* ════════════════════════════════════════════════════════════
+   FIL D'ARIANE — commun à tous
+════════════════════════════════════════════════════════════ */
+.breadcrumb {
+    background: #fff;
+    border-bottom: 1px solid #E5E1D8;
+    padding: 0;
+}
+.breadcrumb__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+.breadcrumb__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #6B7280;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.breadcrumb__link:hover { color: #F97316; }
+.breadcrumb__sep  { color: #D1D5DB; }
+.breadcrumb__current { color: #111; font-weight: 600; }
+
+
+/* ════════════════════════════════════════════════════════════
+   LAPTOP STANDARD (≤ 1200px)
+════════════════════════════════════════════════════════════ */
+@media (max-width: 1200px) {
+
+    /* Grille : 4 → 3 colonnes */
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 1.3rem;
+    }
+
+    /* Hero : contenu moins éloigné des bords */
+    .shop-hero__content {
+        padding: 2rem 1.5rem;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   TABLETTE / PETIT LAPTOP (≤ 1024px)
+════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+    /* ── Hero boutique ── */
+    .shop-hero {
+        min-height: 300px;
+    }
+    .shop-hero__name {
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+    }
+    .shop-hero__content {
+        flex-direction: column;          /* Empile info + CTA */
+        align-items: flex-start;
+        gap: 1.2rem;
+        padding: 2rem 1.5rem;
+    }
+    .shop-hero__cta {
+        width: 100%;
+    }
+    .shop-hero__cta .btn-outline {
+        display: block;
+        width: fit-content;
+    }
+    .shop-hero__stats {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    /* ── Barre de filtres ── */
+    .filters-bar {
+        top: 64px;
+    }
+    .filters-bar__inner {
+        gap: 0;
+        padding: 0 1rem;
+    }
+    .filter-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.82rem;
+    }
+    /* Champ de recherche réduit */
+    .products-search input {
+        width: 160px;
+    }
+
+    /* ── Grille produits : 3 → 2 colonnes ── */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.2rem;
+    }
+
+    /* ── Section produits ── */
+    .products-section {
+        padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── Encart vendeur ── */
+    .vendor-card {
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+        flex-wrap: wrap;
+    }
+    .vendor-card__info {
+        min-width: 0;
+        flex: 1 1 200px;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   GRAND MOBILE / PETITE TABLETTE (≤ 768px)
+════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* ── Fil d'ariane ── */
+    .breadcrumb__inner {
+        padding: 0.65rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* ── Hero boutique ── */
+    .shop-hero {
+        min-height: auto;
+    }
+    .shop-hero__content {
+        padding: 1.8rem 1rem 1.5rem;
+        gap: 1.2rem;
+    }
+    .shop-hero__info {
+        flex-direction: column;          /* Avatar au-dessus du texte */
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .shop-hero__avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 12px;
+    }
+    .shop-hero__name {
+        font-size: clamp(1.4rem, 5vw, 1.9rem);
+    }
+    .shop-hero__vendor {
+        font-size: 0.82rem;
+    }
+    .shop-hero__stats {
+        gap: 0.6rem 1rem;
+    }
+    .shop-stat {
+        font-size: 0.78rem;
+    }
+    .shop-hero__cta {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+    .shop-hero__cta .btn-outline {
+        padding: 0.75rem 1.4rem;
+        font-size: 0.875rem;
+    }
+
+    /* ── Barre de filtres ── */
+    .filters-bar__inner {
+        padding: 0 0.75rem;
+        gap: 0;
+    }
+    .filter-btn {
+        padding: 0.75rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    .filter-btn__count {
+        display: none;               /* Cache les compteurs sur mobile (gain de place) */
+    }
+    /* Masque le tri et la recherche avancée sur mobile — accessible via une autre UI */
+    .filters-bar__right {
+        display: none;
+    }
+
+    /* ── Barre de recherche mobile dédiée (sous les filtres) ── */
+    .mobile-search-bar {
+        background: #fff;
+        padding: 0.65rem 1rem;
+        border-bottom: 1px solid #E5E1D8;
+    }
+    .mobile-search-bar input {
+        width: 100%;
+        padding: 0.6rem 0.9rem 0.6rem 2.4rem;
+        border: 1.5px solid #E5E1D8;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.875rem;
+        outline: none;
+        background: #F5F3EE;
+    }
+    .mobile-search-bar input:focus {
+        border-color: #F97316;
+        box-shadow: 0 0 0 3px rgba(249,115,22,.1);
+    }
+    .mobile-search-wrap {
+        position: relative;
+    }
+    .mobile-search-wrap svg {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9CA3AF;
+        width: 1rem;
+        height: 1rem;
+        pointer-events: none;
+    }
+
+    /* ── Section produits ── */
+    .products-section {
+        padding: 2rem 1rem 3.5rem;
+    }
+    .products-section__header {
+        margin-bottom: 1.4rem;
+        gap: 0.5rem;
+    }
+    .section-eyebrow {
+        font-size: 0.68rem;
+    }
+    .section-title {
+        font-size: clamp(1.1rem, 4vw, 1.5rem) !important;
+    }
+    .products-count {
+        font-size: 0.8rem;
+    }
+
+    /* ── Grille : 2 colonnes ── */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.85rem;
+    }
+
+    /* ── Card produit ── */
+    .product-card__foot {
+        padding: 0.75rem 0.85rem 0.9rem;
+    }
+    .product-card__foot-name {
+        font-size: 0.82rem;
+    }
+    .product-card__foot-price {
+        font-size: 0.88rem;
+    }
+    .product-badge-cat {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+    }
+    .product-badge-flag {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    /* ── Overlay produit sur mobile ──
+         Plus de place pour les infos sur petit écran :
+         Légèrement plus compact
+    ── */
+    .overlay__name {
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+    }
+    .overlay__price-current {
+        font-size: 1.05rem;
+    }
+    .overlay__desc {
+        font-size: 0.75rem;
+        -webkit-line-clamp: 2;       /* Limite à 2 lignes sur mobile */
+        margin-bottom: 0.6rem;
+    }
+    .overlay__stock {
+        font-size: 0.68rem;
+        margin-bottom: 0.6rem;
+    }
+    .overlay__rating {
+        display: none;               /* Cache la note sur très petits écrans */
+    }
+    .overlay__add-btn {
+        padding: 0.65rem;
+        font-size: 0.8rem;
+    }
+    .product-card__overlay {
+        padding: 1rem;
+    }
+
+    /* ── Encart vendeur ── */
+    .vendor-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+        padding: 1.8rem 1rem;
+    }
+    .vendor-card__avatar {
+        width: 64px;
+        height: 64px;
+    }
+    .vendor-card__name {
+        font-size: 1.1rem;
+    }
+    .vendor-card__bio {
+        font-size: 0.875rem;
+    }
+    .vendor-card .btn-outline {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE STANDARD (≤ 640px)
+════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+    /* ── Barre de filtres : scroll plus fluide ── */
+    .filters-bar__inner {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    .filter-btn {
+        scroll-snap-align: start;
+    }
+
+    /* ── Hero : avatar encore plus compact ── */
+    .shop-hero__avatar {
+        width: 60px;
+        height: 60px;
+    }
+    .shop-hero__name {
+        font-size: clamp(1.2rem, 5.5vw, 1.7rem);
+    }
+
+    /* ── Grille : toujours 2 colonnes ── */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.7rem;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   TRÈS PETIT MOBILE (≤ 480px)
+════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+    /* ── Grille : 1 colonne ── */
+    .products-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    /* ── Card en colonne unique : image moins haute ── */
+    .product-card__img-wrap {
+        aspect-ratio: 4 / 3;
+    }
+
+    /* ── Overlay : plus d'espace disponible ── */
+    .overlay__desc {
+        -webkit-line-clamp: 3;        /* Plus de lignes car 1 colonne */
+    }
+    .overlay__rating {
+        display: flex;                /* Re-affiche la note en 1 colonne */
+    }
+    .overlay__name {
+        font-size: 1rem;
+    }
+    .overlay__price-current {
+        font-size: 1.1rem;
+    }
+
+    /* ── Barre de filtres : plus compacte ── */
+    .filter-btn {
+        padding: 0.7rem 0.75rem;
+        font-size: 0.78rem;
+    }
+
+    /* ── Fil d'ariane ── */
+    .breadcrumb__inner {
+        font-size: 0.75rem;
+        padding: 0.6rem 0.75rem;
+    }
+
+    /* ── Section produits ── */
+    .products-section {
+        padding: 1.5rem 0.75rem 3rem;
+    }
+
+    /* ── Encart vendeur ── */
+    .vendor-card {
+        padding: 1.5rem 0.75rem;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   LANDSCAPE MOBILE
+════════════════════════════════════════════════════════════ */
+@media (max-height: 500px) and (min-width: 600px) and (orientation: landscape) {
+
+    /* Hero moins haut en landscape */
+    .shop-hero {
+        min-height: 280px;
+    }
+    .shop-hero__content {
+        padding: 1.2rem 1rem;
+    }
+    .shop-hero__info {
+        flex-direction: row;           /* Garde la disposition côte à côte */
+    }
+    .shop-hero__avatar {
+        width: 56px;
+        height: 56px;
+    }
+    .shop-hero__name {
+        font-size: 1.3rem;
+    }
+
+    /* Grille 2 colonnes toujours en landscape */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   GRAND ÉCRAN (≥ 1400px)
+════════════════════════════════════════════════════════════ */
+@media (min-width: 1400px) {
+
+    /* Grille : 4 colonnes avec plus d'espace */
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 1.8rem;
+    }
+
+    /* Hero : plus d'espace */
+    .shop-hero {
+        min-height: 440px;
+    }
+    .shop-hero__name {
+        font-size: 2.8rem;
+    }
+    .shop-hero__avatar {
+        width: 110px;
+        height: 110px;
+    }
+
+    /* Encart vendeur : plus d'espace */
+    .vendor-card {
+        padding: 3.5rem 2rem;
+    }
+    .vendor-card__avatar {
+        width: 96px;
+        height: 96px;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   PRÉFÉRENCES D'ACCESSIBILITÉ : RÉDUIT LES MOUVEMENTS
+════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+
+    /* Désactive toutes les animations de scroll */
+    .reveal,
+    .reveal.visible {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Désactive l'overlay animé */
+    .product-card__overlay {
+        transition: none !important;
+    }
+
+    /* Désactive le zoom au hover sur l'image */
+    .product-card__img {
+        transition: none !important;
+    }
+
+    /* Désactive le lift de la card */
+    .product-card:hover {
+        transform: none !important;
+    }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   MODE SOMBRE SYSTÈME (optionnel — base)
+   Adapte les couleurs si l'utilisateur préfère le mode sombre
+════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+    /*
+     * Le mode sombre complet sera implémenté quand le design system
+     * sera finalisé. Seules les couches critiques sont gérées ici.
+     */
+    .breadcrumb {
+        background: #1A1A1A;
+        border-color: rgba(255,255,255,.08);
+    }
+    .breadcrumb__link  { color: rgba(255,255,255,.55); }
+    .breadcrumb__current { color: #fff; }
+    .breadcrumb__sep   { color: rgba(255,255,255,.2); }
+
+    .filters-bar {
+        background: rgba(17,17,17,.96);
+        border-color: rgba(255,255,255,.08);
+    }
+    .filter-btn        { color: rgba(255,255,255,.55); }
+    .filter-btn:hover,
+    .filter-btn.active { color: #F97316; }
+
+    .products-section  { background: #111; }
+    .product-card {
+        background: #1E1E1E;
+        border-color: rgba(255,255,255,.08);
+    }
+    .product-card__foot-name { color: #fff; }
+
+    .vendor-section    { background: #1A1A1A; border-color: rgba(255,255,255,.08); }
+    .vendor-card__name { color: #fff; }
+    .vendor-card__bio  { color: rgba(255,255,255,.6); }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   IMPRESSION
+════════════════════════════════════════════════════════════ */
+@media print {
+    .shop-hero__bg,
+    .shop-hero__overlay,
+    .filters-bar,
+    .breadcrumb,
+    .vendor-section         { display: none; }
+
+    .shop-hero {
+        background: #fff !important;
+        color: #111 !important;
+        min-height: auto;
+        padding: 1rem 0;
+    }
+    .shop-hero__name        { color: #111 !important; }
+    .shop-hero__vendor      { color: #333 !important; }
+
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 1rem;
+    }
+    .product-card__overlay  { display: none !important; }
+    .product-card__foot     { padding: 0.5rem; }
+}

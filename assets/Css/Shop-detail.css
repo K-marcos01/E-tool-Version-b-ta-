@@ -1,0 +1,839 @@
+/*
+ * shop-detail.css — Styles de la page détail d'une boutique
+ * ─────────────────────────────────────────────────────────────
+ * Structure visée :
+ *   ┌─ Hero boutique (bannière + infos vendeur) ──────────────┐
+ *   ├─ Barre de filtres / catégories ─────────────────────────┤
+ *   └─ Grille de produits (cards avec overlay info au hover) ─┘
+ *
+ * Comportement des cards produits :
+ *   • Desktop : les infos apparaissent en overlay au survol (hover)
+ *   • Mobile  : les infos apparaissent en overlay au tap (JS)
+ *
+ * Dépend de : global.css (variables, reset, .reveal, .btn-*)
+ * ─────────────────────────────────────────────────────────────
+ */
+
+/* ══════════════════════════════════════════════════════════
+   HERO BOUTIQUE
+══════════════════════════════════════════════════════════ */
+
+/* Conteneur principal du hero */
+.shop-hero {
+  position: relative;
+  background: var(--dark);
+  overflow: hidden;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;        /* Infos ancrées en bas du hero */
+}
+
+/* Image de bannière en fond avec overlay */
+.shop-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  transition: transform 8s ease;  /* Léger Ken Burns au chargement */
+}
+
+/* Dégradé sombre pour lisibilité du texte */
+.shop-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(17, 17, 17, 0.95) 0%,
+    rgba(17, 17, 17, 0.3)  60%,
+    transparent             100%
+  );
+}
+
+/* Contenu positionné au-dessus de l'overlay */
+.shop-hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Zone gauche : avatar + infos texte */
+.shop-hero__info {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+/* Avatar de la boutique (photo du vendeur ou logo) */
+.shop-hero__avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-lg);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  background: var(--mid);         /* Fallback si image absente */
+}
+
+.shop-hero__meta { flex: 1; }
+
+.shop-hero__name {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.shop-hero__vendor {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.8rem;
+}
+
+/* Ligne de stats rapides (produits / note / localisation) */
+.shop-hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.shop-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.shop-stat svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.shop-stat--rating { color: var(--orange); }
+
+/* Bouton "Contacter le vendeur" dans le hero */
+.shop-hero__cta {
+  flex-shrink: 0;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   BARRE DE FILTRES / CATÉGORIES
+══════════════════════════════════════════════════════════ */
+
+.filters-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 64px;                      /* Hauteur de la navbar */
+  z-index: 30;
+}
+
+.filters-bar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  overflow-x: auto;               /* Scroll horizontal sur mobile */
+  scrollbar-width: none;          /* Cache la scrollbar (Firefox) */
+  -ms-overflow-style: none;
+}
+
+/* Cache la scrollbar (Webkit) */
+.filters-bar__inner::-webkit-scrollbar { display: none; }
+
+/* Chaque bouton de catégorie */
+.filter-btn {
+  flex-shrink: 0;
+  padding: 0.9rem 1.2rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  color: var(--orange);
+}
+
+/* Catégorie active */
+.filter-btn.active {
+  color: var(--orange);
+  border-bottom-color: var(--orange);
+}
+
+/* Compteur de produits dans chaque catégorie */
+.filter-btn__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--orange-light);
+  color: var(--orange);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  margin-left: 0.4rem;
+}
+
+/* Zone recherche + tri à droite */
+.filters-bar__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.products-search {
+  position: relative;
+}
+
+.products-search svg {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  color: var(--gray);
+  pointer-events: none;
+}
+
+.products-search input {
+  width: 220px;
+  padding: 0.6rem 0.9rem 0.6rem 2.4rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  color: var(--dark);
+  background: var(--light);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.products-search input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+/* Sélecteur de tri */
+.sort-select {
+  padding: 0.6rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  color: var(--gray);
+  background: var(--light);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.sort-select:focus {
+  border-color: var(--orange);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   SECTION PRODUITS
+══════════════════════════════════════════════════════════ */
+
+.products-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+/* En-tête de section : titre + compteur */
+.products-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.products-count {
+  font-size: 0.85rem;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.products-count strong {
+  color: var(--dark);
+  font-weight: 700;
+}
+
+/* Grille responsive de produits */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1100px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+}
+
+@media (max-width: 420px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
+
+/* Message quand aucun produit ne correspond au filtre */
+.products-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--gray);
+}
+
+.products-empty svg {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 1rem;
+  color: var(--border);
+}
+
+.products-empty p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   CARD PRODUIT
+   ─────────────────────────────────────────────────────────
+   Comportement :
+   • L'image est toujours visible
+   • .product-card__overlay contient toutes les infos
+   • Sur desktop : overlay caché → visible au :hover
+   • Sur mobile  : overlay caché → visible quand .is-open
+     est ajouté par le JS au tap
+══════════════════════════════════════════════════════════ */
+
+/* Wrapper externe (pour l'animation reveal) */
+.product-item {
+  /* pas de style ici — sert juste de groupeur pour reveal */
+}
+
+/* Card principale */
+.product-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+
+  /* Transition pour le lift au hover */
+  transition:
+    transform  var(--transition),
+    box-shadow var(--transition);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Image du produit ────────────────────────────────── */
+.product-card__img-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;           /* Carré parfait */
+  overflow: hidden;
+  background: var(--light);
+}
+
+.product-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(.22, 1, .36, 1);
+  display: block;
+}
+
+/* Légère dézoom de l'image quand l'overlay est ouvert */
+.product-card:hover .product-card__img,
+.product-card.is-open .product-card__img {
+  transform: scale(1.06);
+}
+
+/* ── Badges positionnés sur l'image ──────────────────── */
+
+/* Badge de catégorie (en haut à gauche) */
+.product-badge-cat {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  color: var(--dark);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 2;
+}
+
+/* Badge "Nouveau" ou "Promo" (en haut à droite) */
+.product-badge-flag {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+.product-badge-flag--promo {
+  background: #DC2626;
+}
+
+/* ── Overlay d'informations ──────────────────────────── */
+.product-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(17, 17, 17, 0.97) 0%,
+    rgba(17, 17, 17, 0.82) 55%,
+    rgba(17, 17, 17, 0.45) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.3rem;
+  z-index: 3;
+
+  /* État initial : invisible */
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity   0.3s cubic-bezier(.22, 1, .36, 1),
+    transform 0.3s cubic-bezier(.22, 1, .36, 1);
+
+  /* Empêche la sélection du texte par accident au hover */
+  user-select: none;
+}
+
+/* ─── Ouverture DESKTOP : via :hover ────────────────── */
+@media (hover: hover) {
+  .product-card:hover .product-card__overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Ouverture MOBILE : via classe .is-open (JS) ───── */
+.product-card.is-open .product-card__overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Nom du produit dans l'overlay */
+.overlay__name {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+/* Prix */
+.overlay__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.overlay__price-current {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--orange);
+}
+
+/* Prix barré (avant promo) */
+.overlay__price-old {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: line-through;
+}
+
+/* Description courte */
+.overlay__desc {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.55;
+  margin-bottom: 0.9rem;
+
+  /* Limite à 3 lignes avec ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Stock disponible */
+.overlay__stock {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.overlay__stock--ok   { color: #4ade80; }
+.overlay__stock--low  { color: #fbbf24; }
+.overlay__stock--out  { color: #f87171; }
+
+.overlay__stock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Bouton "Ajouter au panier" */
+.overlay__add-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.overlay__add-btn:hover {
+  background: var(--orange-dark);
+  transform: scale(1.02);
+}
+
+/* Désactivé si rupture de stock */
+.overlay__add-btn:disabled {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Pied de carte (visible sans hover : juste le nom + prix) */
+.product-card__foot {
+  padding: 1rem 1rem 1.1rem;
+}
+
+.product-card__foot-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.25rem;
+}
+
+.product-card__foot-price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--orange);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   INDICATEUR "VOIR LES INFOS" — mobile uniquement
+   Petite icône en bas à droite pour signaler l'interactivité
+══════════════════════════════════════════════════════════ */
+@media (hover: none) {
+  .product-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.6rem;
+    width: 28px;
+    height: 28px;
+    background: var(--orange);
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='white' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px;
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.45);
+    z-index: 4;
+    transition: opacity 0.2s;
+  }
+
+  /* Masque l'icône quand la card est déjà ouverte */
+  .product-card.is-open::after {
+    opacity: 0;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   MODALE PRODUIT — détail complet au clic (optionnel)
+══════════════════════════════════════════════════════════ */
+
+/* Fond sombre semi-transparent */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  /* Animation d'entrée */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Boîte de dialogue modale */
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.modal-backdrop.open .modal-box {
+  transform: scale(1) translateY(0);
+}
+
+.modal-box__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 600px) {
+  .modal-box__grid { grid-template-columns: 1fr; }
+}
+
+.modal-box__img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+}
+
+@media (max-width: 600px) {
+  .modal-box__img {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+}
+
+.modal-box__body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.modal-close:hover { background: rgba(0, 0, 0, 0.12); }
+
+
+/* ══════════════════════════════════════════════════════════
+   SECTION VENDEUR — encart en bas de page
+══════════════════════════════════════════════════════════ */
+
+.vendor-section {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+
+.vendor-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.vendor-card__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--border);
+  flex-shrink: 0;
+}
+
+.vendor-card__info { flex: 1; min-width: 200px; }
+
+.vendor-card__name {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.3rem;
+}
+
+.vendor-card__bio {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.65;
+  max-width: 500px;
+}
+
+.vendor-card__since {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   ÉTATS DE CHARGEMENT (skeleton)
+══════════════════════════════════════════════════════════ */
+
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #eee 25%,
+    #f5f5f5 50%,
+    #eee 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   TOAST NOTIFICATION (ajout panier)
+══════════════════════════════════════════════════════════ */
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--dark);
+  color: #fff;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+
+  /* Caché par défaut */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast__icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  background: var(--orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

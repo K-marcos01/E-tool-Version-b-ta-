@@ -1,0 +1,62 @@
+/* ─── GUIDE ────────────────────────────────────────── */
+  .guide-bg {
+    background: var(--dark);
+  }
+  .guide-bg .section__title { color: #fff; }
+  .guide-bg .section__desc  { color: rgba(255,255,255,0.6); }
+  .guide-bg .section__eyebrow { color: var(--orange); }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+  @media (max-width: 900px) { .steps { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 540px) { .steps { grid-template-columns: 1fr; } }
+  .step-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 16px;
+    padding: 2rem 1.6rem;
+    position: relative;
+    transition: background 0.22s, border-color 0.22s, transform 0.22s;
+  }
+  .step-card:hover {
+    background: rgba(249,115,22,0.1);
+    border-color: rgba(249,115,22,0.3);
+    transform: translateY(-4px);
+  }
+  .step-number {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(249,115,22,0.18);
+    line-height: 1;
+    position: absolute;
+    top: 1rem; right: 1.4rem;
+    user-select: none;
+  }
+  .step-icon {
+    width: 3rem; height: 3rem;
+    background: rgba(249,115,22,0.15);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+  .step-icon svg { width: 1.5rem; height: 1.5rem; color: var(--orange); }
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.6rem;
+  }
+  .step-text {
+    font-size: 0.87rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+  .step-connector {
+    display: none; /* visual only on large screens */
+  }
+
