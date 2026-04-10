@@ -1,0 +1,468 @@
+/*
+ * navbar.css — Styles autonomes du Header / Navbar
+ * ═══════════════════════════════════════════════════════════════════
+ * POURQUOI CE FICHIER EXISTE :
+ *   Le Header.php utilise des classes Tailwind (ex: hidden, md:flex,
+ *   gap-8, etc.) qui nécessitent le CDN Tailwind pour fonctionner.
+ *   Hors connexion, ce CDN est inaccessible → la navbar s'effondre.
+ *
+ *   Ce fichier reproduit en CSS pur TOUTES les classes Tailwind
+ *   utilisées dans Header.php, sans aucune dépendance externe.
+ *   Il doit être chargé AVANT le CDN Tailwind dans le <head>.
+ *
+ * UTILISATION :
+ *   Ajouter dans Header.php, juste après global.css :
+ *   <link rel="stylesheet" href="../assets/Css/navbar.css">
+ *
+ * CLASSES COUVERTES (issues de Header.php) :
+ *   Layout     : fixed, top-0, left-0, right-0, z-50, flex, hidden,
+ *                items-center, justify-between, gap-2, gap-4, gap-8,
+ *                max-w-[1200px], mx-auto, px-6, h-16, p-2, p-1.5,
+ *                relative, absolute
+ *   Responsive : md:flex, md:hidden, md:block
+ *   Typography : text-sm, font-semibold, text-gray-700, font-sans
+ *   Colors     : bg-white, hover:bg-gray-100
+ *   Borders    : rounded-lg, rounded-full
+ *   Misc       : transition, list-none, m-0, p-0, p-4,
+ *                w-8, h-8, object-cover, overflow-hidden,
+ *                flex-col, gap-1
+ * ═══════════════════════════════════════════════════════════════════
+ */
+
+
+/* ══════════════════════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════════════════════ */
+
+/* S'assure que box-sizing est cohérent */
+#main-nav,
+#main-nav * {
+    box-sizing: border-box;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   NAVBAR PRINCIPALE (#main-nav)
+══════════════════════════════════════════════════════════ */
+
+/* Équivalent : fixed top-0 left-0 right-0 z-50 transition-all duration-300 */
+#main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition: all 300ms ease;
+    /* Le background/border sont inline dans le HTML, on ne les redéfinit pas */
+}
+
+/* Équivalent : max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between */
+#main-nav > div:first-child {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;    /* px-6 */
+    padding-right: 1.5rem;
+    height: 4rem;            /* h-16 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   LOGO
+══════════════════════════════════════════════════════════ */
+
+/* Équivalent : flex items-center gap-2 no-underline group */
+#main-nav a.logo-link,
+#main-nav a[href*="Home.php"]:first-child {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;             /* gap-2 */
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* Boîte orange du logo — équivalent du <span> inline */
+#main-nav .logo-box {
+    width: 2rem;
+    height: 2rem;
+    background: #F97316;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    color: #fff;
+    font-size: 1rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    overflow: hidden;        /* Pour l'image logo à l'intérieur */
+}
+
+#main-nav .logo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#main-nav .logo-box:hover {
+    transform: scale(1.1);   /* group-hover:scale-110 */
+}
+
+/* Texte du logo */
+#main-nav .logo-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #111111;
+    white-space: nowrap;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   NAVIGATION CENTRALE (liens desktop)
+══════════════════════════════════════════════════════════ */
+
+/* Équivalent : hidden md:flex items-center gap-8 list-none m-0 p-0 */
+#main-nav ul {
+    display: none;           /* hidden par défaut (mobile first) */
+    align-items: center;
+    gap: 2rem;               /* gap-8 */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Affichage sur desktop (≥ 768px) — équivalent md:flex */
+@media (min-width: 768px) {
+    #main-nav ul {
+        display: flex;
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   ZONE UTILISATEUR (droite)
+══════════════════════════════════════════════════════════ */
+
+/* Équivalent : flex items-center gap-4 */
+#main-nav .user-zone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;               /* gap-4 */
+}
+
+/* ── Bouton panier ─────────────────────────────────────── */
+
+/* Équivalent : relative p-2 rounded-lg hover:bg-gray-100 transition */
+#main-nav .cart-btn {
+    position: relative;
+    padding: 0.5rem;         /* p-2 */
+    border-radius: 0.5rem;   /* rounded-lg */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 150ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-nav .cart-btn:hover {
+    background: #F3F4F6;     /* hover:bg-gray-100 */
+}
+
+/* Badge compteur panier */
+#cart-count {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    background: #F97316;
+    color: #fff;
+    border-radius: 50%;      /* rounded-full */
+    font-size: 0.6rem;
+    font-weight: 700;
+    display: none;           /* caché par défaut */
+    align-items: center;
+    justify-content: center;
+}
+
+#cart-count.visible {
+    display: flex;
+}
+
+/* ── Menu utilisateur ──────────────────────────────────── */
+
+/* Équivalent : relative */
+#user-menu-wrap {
+    position: relative;
+}
+
+/* Équivalent : flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-100 transition */
+#user-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;             /* gap-2 */
+    padding: 0.375rem;       /* p-1.5 */
+    border-radius: 0.5rem;   /* rounded-lg */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 150ms ease;
+}
+
+#user-menu-btn:hover {
+    background: #F3F4F6;     /* hover:bg-gray-100 */
+}
+
+/* Avatar image — équivalent : w-8 h-8 rounded-full object-cover */
+#user-menu-btn img.avatar-img {
+    width: 2rem;             /* w-8 */
+    height: 2rem;            /* h-8 */
+    border-radius: 50%;      /* rounded-full */
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Nom utilisateur — équivalent : hidden md:block text-sm font-semibold text-gray-700 */
+#user-menu-btn .user-name {
+    display: none;           /* hidden par défaut */
+    font-size: 0.875rem;     /* text-sm */
+    font-weight: 600;        /* font-semibold */
+    color: #374151;          /* text-gray-700 */
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    #user-menu-btn .user-name {
+        display: block;      /* md:block */
+    }
+}
+
+/* ── Dropdown utilisateur ──────────────────────────────── */
+
+/* L'affichage est contrôlé inline (display:none/block) via JS */
+#user-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    background: #fff;
+    border: 1px solid #E5E1D8;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.1);
+    min-width: 180px;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/* Items du dropdown */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: background 150ms ease;
+}
+
+.dropdown-item:hover {
+    background: #F5F3EE;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   BOUTON BURGER (mobile uniquement)
+══════════════════════════════════════════════════════════ */
+
+/* Équivalent : md:hidden p-2 rounded-lg hover:bg-gray-100 transition */
+#burger-btn {
+    display: flex;           /* Visible par défaut (mobile) */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;         /* p-2 */
+    border-radius: 0.5rem;   /* rounded-lg */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 150ms ease;
+}
+
+#burger-btn:hover {
+    background: #F3F4F6;
+}
+
+/* Masqué sur desktop — équivalent md:hidden */
+@media (min-width: 768px) {
+    #burger-btn {
+        display: none;
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   MENU MOBILE DÉROULANT
+══════════════════════════════════════════════════════════ */
+
+/* Équivalent : md:hidden (affiché/masqué par JS inline) */
+#mobile-menu {
+    /* Le display est contrôlé par JS, on gère juste le style */
+    border-top: 1px solid #E5E1D8;
+    background: #fff;
+}
+
+/* Masqué sur desktop — équivalent md:hidden */
+@media (min-width: 768px) {
+    #mobile-menu {
+        display: none !important;  /* Force le masquage sur desktop */
+    }
+}
+
+/* Équivalent : list-none m-0 p-4 flex flex-col gap-1 */
+#mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 1rem;           /* p-4 */
+    display: flex;
+    flex-direction: column;  /* flex-col */
+    gap: 0.25rem;            /* gap-1 */
+}
+
+/* Liens du menu mobile */
+#mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 150ms ease;
+}
+
+#mobile-menu a:hover {
+    background: rgba(249, 115, 22, 0.06);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   ESPACEUR NAVBAR (div après </nav>)
+   Compense la navbar fixe pour que le contenu ne passe pas dessous
+══════════════════════════════════════════════════════════ */
+.nav-spacer {
+    height: 4rem;            /* Même hauteur que h-16 */
+}
+
+/* Si l'espaceur est un div inline sans classe, on cible via son style */
+/* (Le Header.php utilise style="height:64px;" — pas besoin de règle CSS) */
+
+
+/* ══════════════════════════════════════════════════════════
+   HOVER DES LIENS NAV (desktop)
+   Reproduit l'effet souligné défini dans global.css
+══════════════════════════════════════════════════════════ */
+.nav-link {
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+    color: #374151;
+}
+
+.nav-link:hover {
+    color: #F97316;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #F97316;
+    border-radius: 2px;
+    transition: width 0.22s cubic-bezier(.22, 1, .36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: #F97316;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE NAVBAR — TABLETTE (≤ 1024px)
+══════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    /* Réduit le padding horizontal */
+    #main-nav > div:first-child {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    /* Réduit le gap entre liens nav */
+    #main-nav ul {
+        gap: 1.2rem;
+    }
+    /* Logo texte légèrement plus petit */
+    #main-nav .logo-text {
+        font-size: 1.1rem;
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE NAVBAR — MOBILE (< 768px)
+══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+    /* Réduit le padding */
+    #main-nav > div:first-child {
+        padding-left: 0.85rem;
+        padding-right: 0.85rem;
+        gap: 0.5rem;
+    }
+    /* Réduit le nom utilisateur (masqué de toute façon via .user-name) */
+    #user-menu-btn {
+        padding: 0.3rem;
+    }
+    /* Réduit la taille du cart btn */
+    #main-nav .cart-btn {
+        padding: 0.4rem;
+    }
+    /* Zone droite */
+    #main-nav .user-zone {
+        gap: 0.4rem;
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   TRÈS PETIT MOBILE (≤ 360px)
+══════════════════════════════════════════════════════════ */
+@media (max-width: 360px) {
+    #main-nav > div:first-child {
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
+    }
+    #main-nav .logo-text {
+        font-size: 1rem;
+    }
+    #main-nav .logo-box {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+    /* Masque l'icône panier sur très petit écran si besoin */
+    #main-nav .cart-btn {
+        display: none;
+    }
+}

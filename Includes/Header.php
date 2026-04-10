@@ -19,11 +19,24 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./navbar.css">
 
     <!-- CSS Global -->
     <link rel="stylesheet" href="../assets/Css/global.css">
 
-    <!--Tailwind CDN (utilitaires) -->
+    <!--
+        navbar.css : reproduit en CSS pur toutes les classes Tailwind
+        du header. Même rendu en ligne ET hors connexion.
+    -->
+    <link rel="stylesheet" href="../assets/Css/navbar.css">
+
+    <!--
+        fix-overflow.css : corrige l'espace blanc à droite sur mobile.
+        Appliqué sur toutes les pages via ce header.
+    -->
+    <link rel="stylesheet" href="../assets/Css/fix-overflow.css">
+
+    <!-- Tailwind CDN — complément si connexion disponible -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         // Extension de la palette Tailwind avec les couleurs du projet
@@ -43,7 +56,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         }
     </script>
 </head>
-<body class="bg-[#F5F3EE] font-sans">
+<body class="bg-[#F5F3EE] font-sans" style="background:#F5F3EE; font-family:'DM Sans',sans-serif; overflow-x:hidden; width:100%; max-width:100%;">
 
 <!-- NAVBAR
      - Fixe en haut, fond blanc avec légère ombre au scroll
@@ -54,7 +67,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
 
         <!-- Logo -->
-        <a href="../Int_Clients/Home.php" class="flex items-center gap-2 no-underline group">
+        <a href="../Int_Clients/Home.php" class="flex items-center gap-2 no-underline group logo-link" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;flex-shrink:0;">
             <span style="
                 width:2rem; height:2rem;
                 background: #F97316;
@@ -63,9 +76,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 font-family:'Playfair Display',serif;
                 font-weight:900; color:#fff; font-size:1rem;
                 transition: transform .2s;
-            " class="group-hover:scale-110"><img src="../Img/Dynamic 'E' Logo for E-tool Project.png" alt="Logo E-tool"></span>
-            <span style="font-family:'Playfair Display',serif; font-weight:900; font-size:1.2rem; color:#111111;">
-                E<span style="color:#F97316;">-</span><span style="font-family:'Playfair Display',serif; font-weight:900; font-size:1.2rem; color:#111111;">tool</span>
+            " class="logo-box group-hover:scale-110" style="overflow:hidden;flex-shrink:0;"><img src="../Img/Dynamic 'E' Logo for E-tool Project.png" alt="Logo E-tool"></span>
+            <span class="logo-text" style="font-family:'Playfair Display',serif; font-weight:900; font-size:1.2rem; color:#111111; white-space:nowrap;">
+                E<span style="color:#F97316;">-</span><span class="logo-text" style="font-family:'Playfair Display',serif; font-weight:900; font-size:1.2rem; color:#111111; white-space:nowrap;">tool</span>
             </span>
         </a>
 
@@ -105,10 +118,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </ul>
 
         <!-- Zone utilisateur + burger -->
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 user-zone" style="display:flex;align-items:center;gap:1rem;">
 
             <!-- Icône panier -->
-            <button class="relative p-2 rounded-lg hover:bg-gray-100 transition" title="Panier" aria-label="Panier">
+            <button class="relative p-2 rounded-lg hover:bg-gray-100 transition cart-btn" title="Panier" aria-label="Panier">
                 <svg width="20" height="20" fill="none" stroke="#374151" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
                     <path d="M16 10a4 4 0 01-8 0"/>
@@ -144,7 +157,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             <?php echo strtoupper(substr($_SESSION['user_name'] ?? 'U', 0, 1)); ?>
                         </span>
                     <?php endif; ?>
-                    <span class="hidden md:block text-sm font-semibold text-gray-700">
+                    <span class="hidden md:block text-sm font-semibold text-gray-700 user-name" style="font-size:.875rem;font-weight:600;color:#374151;white-space:nowrap;">
                         <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Mon compte'); ?>
                     </span>
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

@@ -1,0 +1,376 @@
+/*
+ * fix-overflow.css — Correctif de l'espace blanc à droite sur mobile
+ * ═══════════════════════════════════════════════════════════════════
+ * PROBLÈME :
+ *   Sur mobile et certains appareils, un espace blanc apparaît sur le
+ *   côté droit de la page. Cela est causé par :
+ *
+ *   1. Des éléments plus larges que la fenêtre (width > 100vw)
+ *      → Images, conteneurs, grilles sans max-width
+ *   2. overflow-x non bloqué sur html et body
+ *      → Le navigateur autorise le scroll horizontal
+ *   3. Des marges ou paddings négatifs qui dépassent
+ *   4. Tailwind qui n'a pas chargé (CDN hors ligne) → des éléments
+ *      perdent leur max-w-[1200px] et s'étalent en pleine largeur
+ *   5. Des positions absolues/fixed dont les enfants débordent
+ *
+ * SOLUTION :
+ *   Ce fichier applique overflow-x:hidden sur html et body,
+ *   contraint la largeur de tous les conteneurs principaux,
+ *   et corrige chaque source connue de débordement dans le projet.
+ *
+ * UTILISATION :
+ *   Charger ce fichier en DERNIER dans chaque page (Home.php,
+ *   Shop-detail.php) pour qu'il soit prioritaire sur les autres CSS.
+ *   <link rel="stylesheet" href="../assets/Css/fix-overflow.css">
+ *
+ *   Il peut aussi être ajouté dans Header.php pour s'appliquer
+ *   automatiquement sur toutes les pages.
+ * ═══════════════════════════════════════════════════════════════════
+ */
+
+
+/* ══════════════════════════════════════════════════════════
+   1. BLOCAGE DU SCROLL HORIZONTAL — html & body
+   C'est la règle la plus importante.
+══════════════════════════════════════════════════════════ */
+html {
+    overflow-x: hidden;          /* Bloque le scroll horizontal */
+    max-width: 100%;             /* Empêche html de dépasser la fenêtre */
+    /* scroll-behavior conservé depuis global.css */
+}
+
+body {
+    overflow-x: hidden;          /* Double protection sur body */
+    max-width: 100%;
+    width: 100%;
+    position: relative;          /* Contexte de positionnement sûr */
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   2. CONTRAINTE UNIVERSELLE SUR LES ÉLÉMENTS LARGES
+   Empêche tout élément de dépasser la largeur du viewport
+══════════════════════════════════════════════════════════ */
+
+/* Images : jamais plus larges que leur conteneur */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tableaux et blocs pouvant déborder */
+table,
+pre,
+code,
+textarea {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   3. CONTENEURS PRINCIPAUX
+   S'assure que les wrappers max-w-[1200px] fonctionnent
+   même sans Tailwind CDN
+══════════════════════════════════════════════════════════ */
+
+/* Navbar inner */
+#main-nav > div:first-child {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    /* overflow: hidden retiré ici pour ne pas couper le dropdown */
+}
+
+/* Conteneurs de section génériques */
+.section,
+.section-wrap,
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   4. HERO — source fréquente de débordement
+══════════════════════════════════════════════════════════ */
+.hero {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;            /* Empêche l'image de fond de déborder */
+    position: relative;
+}
+
+.hero__bg {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* position:absolute est géré dans Hero.css */
+}
+
+.hero__content {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    /* Padding via Hero.css */
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   5. SECTIONS GÉNÉRIQUES — about, guide, boutiques, stats
+══════════════════════════════════════════════════════════ */
+.about-bg,
+.guide-bg,
+.shops-bg,
+.stats,
+.vendor-section,
+.products-section,
+.filters-bar,
+.breadcrumb {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   6. GRILLES — empêche les colonnes de déborder
+══════════════════════════════════════════════════════════ */
+
+/* Grille boutiques (Home.php) */
+.shops-grid {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Grille produits (Shop-detail.php) */
+.products-grid {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Grille about */
+.about__grid {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Steps guide */
+.steps {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Stats */
+.stats__inner {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   7. CARTES — boutique & produit
+══════════════════════════════════════════════════════════ */
+.shop-card,
+.shop-card-item,
+.product-card,
+.product-item {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;            /* Empêche le contenu interne de déborder */
+}
+
+/* Images dans les cartes */
+.shop-card__img,
+.product-card__img {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   8. HERO BOUTIQUE (Shop-detail.php)
+══════════════════════════════════════════════════════════ */
+.shop-hero {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.shop-hero__bg {
+    max-width: 100%;
+    width: 100%;
+}
+
+.shop-hero__content {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   9. BARRE DE FILTRES — scroll horizontal interne contrôlé
+══════════════════════════════════════════════════════════ */
+.filters-bar__inner {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    /* overflow-x:auto est souhaitable ICI (scroll des filtres) */
+    overflow-x: auto;
+    overflow-y: hidden;          /* Mais pas vertical */
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   10. FOOTER
+══════════════════════════════════════════════════════════ */
+footer {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+footer > div {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   11. ÉLÉMENTS AVEC POSITION ABSOLUE/FIXED
+   Leurs parents doivent avoir overflow:hidden ou
+   un contexte de positionnement défini
+══════════════════════════════════════════════════════════ */
+
+/* L'overlay du hero */
+.hero__overlay,
+.shop-hero__overlay {
+    position: absolute;
+    inset: 0;                    /* top:0 right:0 bottom:0 left:0 */
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* L'overlay des cards produit */
+.product-card__img-wrap {
+    position: relative;
+    overflow: hidden;            /* Contient l'overlay et l'image */
+    width: 100%;
+}
+
+.product-card__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   12. CORRECTIFS SPÉCIFIQUES MOBILE
+══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* Évite que le padding horizontal crée un débordement */
+    .section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Hero : s'assure que le contenu ne dépasse pas */
+    .hero__content,
+    .shop-hero__content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* La barre de filtres scroll en interne mais ne déborde pas */
+    .filters-bar {
+        overflow-x: hidden;
+    }
+
+    /* Les boutons de filtre ne gonflent pas la page */
+    .filter-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb__inner {
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Encart vendeur */
+    .vendor-card {
+        box-sizing: border-box;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Sur très petit mobile : padding encore plus réduit */
+    .section {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .hero__content,
+    .shop-hero__content {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    /* Step cards : s'assure qu'elles ne débordent pas */
+    .step-card {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Feature cards */
+    .feature-card {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   13. DÉBOGAGE — à activer temporairement si le problème persiste
+   Décommenter pour visualiser quel élément déborde
+══════════════════════════════════════════════════════════ */
+/*
+* {
+    outline: 1px solid red;
+}
+*::-webkit-scrollbar {
+    display: block !important;
+}
+*/

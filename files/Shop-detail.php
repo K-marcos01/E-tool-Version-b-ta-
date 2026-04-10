@@ -34,8 +34,9 @@ $totalProducts = count($products);
 include '../Includes/Header.php';
 ?>
 
-<link rel="stylesheet" href="../assets/Css/Shop-detail.css">
-<link rel="stylesheet" href="../assets/Css/responsive-shop-detail.css">
+<link rel="stylesheet" href="../assets/Css/Shop_Css/Shop-detail.css">
+<link rel="stylesheet" href="../assets/Css/Shop_Css/responsive-shop-detail.css">
+<link rel="stylesheet" href="../assets/Css/fix-overflow.css">
 
 
 <!-- FIL D'ARIANE -->

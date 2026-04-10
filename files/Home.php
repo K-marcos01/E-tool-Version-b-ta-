@@ -17,11 +17,13 @@ include '../Includes/Header.php';
 ?>
 
 <!-- CSS spécifiques à Home -->
-<link rel="stylesheet" href="../assets/Css/body.css">
-<link rel="stylesheet" href="../assets/Css/Hero.css">
-<link rel="stylesheet" href="../assets/Css/Shop.css">
-<link rel="stylesheet" href="../assets/Css/Guide.css">
-<link rel="stylesheet" href="../assets/Css/About.css">
+<link rel="stylesheet" href="../assets/Css/Home_Css/About.css">
+<link rel="stylesheet" href="../assets/Css/Home_Css/Guide.css">
+<link rel="stylesheet" href="../assets/Css/Home_Css/Hero.css">
+<link rel="stylesheet" href="../assets/Css/Home_Css/body.css">
+<link rel="stylesheet" href="../assets/Css/Home_Css/global.css">
+<link rel="stylesheet" href="../assets/Css/Shop_Css/Shop.css">
+<link rel="stylesheet" href="../assets/Css/fix-overflow.css">
 <!-- CSS responsive dédié à Home -->
 <link rel="stylesheet" href="../assets/Css/responsive-home.css">
 
