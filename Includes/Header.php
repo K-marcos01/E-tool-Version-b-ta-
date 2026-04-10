@@ -28,7 +28,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         navbar.css : reproduit en CSS pur toutes les classes Tailwind
         du header. Même rendu en ligne ET hors connexion.
     -->
-    <link rel="stylesheet" href="../assets/Css/navbar.css">
+    <link rel="stylesheet" href="../assets/Css/Head.css/navbar.css">
 
     <!--
         fix-overflow.css : corrige l'espace blanc à droite sur mobile.
