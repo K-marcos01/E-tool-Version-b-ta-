@@ -67,7 +67,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
 
         <!-- Logo -->
-        <a href="../Int_Clients/Home.php" class="flex items-center gap-2 no-underline group logo-link" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;flex-shrink:0;">
+        <a href="../files/Home.php" class="flex items-center gap-2 no-underline group logo-link" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;flex-shrink:0;">
             <span style="
                 width:2rem; height:2rem;
                 background: #F97316;
@@ -96,7 +96,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 $is_active = ($current_page === $file);
             ?>
             <li>
-                <a href="../Pages/<?php echo $file; ?>"
+                <a href="../files/<?php echo $file; ?>"
                    style="
                        font-size:.9rem; font-weight:600;
                        text-decoration:none;
@@ -172,16 +172,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,.1);
                     min-width:180px; overflow:hidden; z-index:100;
                 ">
-                    <a href="../Pages/Profile.php" style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1.2rem;font-size:.875rem;color:#374151;text-decoration:none;transition:background .15s;" class="dropdown-item">
+                    <a href="../files/Profile.php" style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1.2rem;font-size:.875rem;color:#374151;text-decoration:none;transition:background .15s;" class="dropdown-item">
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         Mon profil
                     </a>
-                    <a href="../Pages/Orders.php" style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1.2rem;font-size:.875rem;color:#374151;text-decoration:none;transition:background .15s;" class="dropdown-item">
+                    <a href="../files/Orders.php" style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1.2rem;font-size:.875rem;color:#374151;text-decoration:none;transition:background .15s;" class="dropdown-item">
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1" ry="1"/></svg>
                         Mes commandes
                     </a>
                     <hr style="border:none;border-top:1px solid #E5E1D8;margin:0;">
-                    <a href="../Logout.php" style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1.2rem;font-size:.875rem;color:#DC2626;text-decoration:none;transition:background .15s;" class="dropdown-item">
+                    <a href="../files/Logout.php" style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1.2rem;font-size:.875rem;color:#DC2626;text-decoration:none;transition:background .15s;" class="dropdown-item">
                         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                         Déconnexion
                     </a>
@@ -206,7 +206,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <ul class="list-none m-0 p-4 flex flex-col gap-1">
             <?php foreach ($nav_links as $label => $file): ?>
             <li>
-                <a href="../Pages/<?php echo $file; ?>"
+                <a href="../files/<?php echo $file; ?>"
                    style="display:block; padding:.75rem 1rem; border-radius:8px; font-weight:600; font-size:.95rem;
                           text-decoration:none; color:<?php echo ($current_page===$file)?'#F97316':'#374151'; ?>;
                           background:<?php echo ($current_page===$file)?'rgba(249,115,22,.08)':'transparent'; ?>;
