@@ -69,7 +69,7 @@ $SHOPS_DATA = [
         'location'      => 'Pointe-Noire, Congo',
         'rating'        => 4.8,
         'is_open'       => true,
-        'image'         => 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=600',
+        'image'         => '../Img/HOME.jpeg',
         'banner'        => 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1400',
         'avatar'        => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200',
         'vendor_avatar' => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150',
@@ -83,11 +83,11 @@ $SHOPS_DATA = [
         'vendor'        => 'Jean-Pierre Loemba',
         'vendor_bio'    => 'Maître tisserand avec plus de 15 ans d\'expérience, Jean-Pierre perpétue les techniques de tissage traditionnel dans un atelier indépendant à Brazzaville.',
         'vendor_since'  => '2021',
-        'description'   => 'Textiles artisanaux tissés à la main par des créateurs locaux certifiés.',
+        'description'   => 'Sac à main en tissu local, design moderne et fonctionnel.',
         'location'      => 'Brazzaville, Congo',
         'rating'        => 4.7,
         'is_open'       => true,
-        'image'         => 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?q=80&w=600',
+        'image'         => '../Img/Bag_home.jpeg',
         'banner'        => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1400',
         'avatar'        => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200',
         'vendor_avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150',
@@ -159,7 +159,25 @@ $SHOPS_DATA = [
         'location'      => 'Brazzaville, Congo',
         'rating'        => 4.8,
         'is_open'       => true,
-        'image'         => 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600',
+        'image'         => '../Img/Tissu.jpeg',
+        'banner'        => 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1400',
+        'avatar'        => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200',
+        'vendor_avatar' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150',
+        'category'      => 'Maroquinerie',
+    ],
+
+    /* ── Boutique 7 ─────────────────────────────────────────────────── */
+    [
+        'id'            => 7,
+        'name'          => 'Maison des Souliers & Vêtements',
+        'vendor'        => 'MJ',
+        'vendor_bio'    => 'Propriétaire de la boutique, MJ est passionné par les chaussures artisanales.',
+        'vendor_since'  => '2023',
+        'description'   => 'Vente de chaussures de qualité et de vêtements de qualité.',
+        'location'      => 'Brazzaville, Congo',
+        'rating'        => 4.8,
+        'is_open'       => true,
+        'image'         => '../Img/Paies.jpeg',
         'banner'        => 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1400',
         'avatar'        => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200',
         'vendor_avatar' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150',
@@ -197,18 +215,18 @@ $SHOPS_DATA = [
 $PRODUCTS_DATA = [
 
     /* ── Produits Boutique 1 : Maison & Sens ────────────────────────── */
-    ['id'=>1,  'shop_id'=>1, 'name'=>'Vase en terre cuite',        'description'=>'Vase fait main en terre cuite naturelle extraite localement. Finition mate, idéal pour les fleurs séchées. Hauteur 28 cm, diamètre 12 cm. Pièce unique numérotée.',                                  'price'=>18500,  'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=400', 'stock'=>12, 'rating'=>4.8, 'is_new'=>true,  'category'=>'Décoration',  'cat_slug'=>'decoration'],
-    ['id'=>2,  'shop_id'=>1, 'name'=>'Bol céramique artisanal',     'description'=>'Bol en grès émaillé tourné à la main. Disponible en 3 coloris : ocre, bleu nuit et blanc naturel. Diamètre 15 cm. Passe au lave-vaisselle et au micro-ondes.',                                      'price'=>12000,  'old_price'=>15500, 'image'=>'https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=400', 'stock'=>8,  'rating'=>4.6, 'is_new'=>false, 'category'=>'Céramique',   'cat_slug'=>'ceramique'],
-    ['id'=>3,  'shop_id'=>1, 'name'=>'Photophore verre soufflé',    'description'=>'Photophore artisanal en verre soufflé à la bouche par un maître verrier. Teintes irisées uniques, aucune pièce identique. Hauteur 15 cm. Livré avec 3 bougies chauffe-plat.',                        'price'=>26500,  'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=400', 'stock'=>5,  'rating'=>4.9, 'is_new'=>false, 'category'=>'Décoration',  'cat_slug'=>'decoration'],
-    ['id'=>4,  'shop_id'=>1, 'name'=>'Plateau en bois flotté',      'description'=>'Plateau décoratif et fonctionnel en bois flotté récupéré sur les rives du fleuve Congo. Traitement naturel à l\'huile de lin. Dimensions : 45×25 cm. Pièce absolument unique.',                      'price'=>32000,  'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=400', 'stock'=>3,  'rating'=>5.0, 'is_new'=>true,  'category'=>'Décoration',  'cat_slug'=>'decoration'],
-    ['id'=>5,  'shop_id'=>1, 'name'=>'Set de 4 tasses en grès',     'description'=>'Set de 4 tasses en grès artisanal, oreille ergonomique et fond anti-dérapant. Chaque tasse est légèrement différente, reflet du travail à la main. Volume 200 ml. Coffret cadeau disponible.',    'price'=>23500,  'old_price'=>28000, 'image'=>'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?q=80&w=400', 'stock'=>15, 'rating'=>4.7, 'is_new'=>false, 'category'=>'Céramique',   'cat_slug'=>'ceramique'],
-    ['id'=>6,  'shop_id'=>1, 'name'=>'Bougie parfumée naturelle',   'description'=>'Bougie 100% cire de soja naturelle, parfumée aux huiles essentielles de bois de cèdre et vanille sauvage. Mèche en coton. Durée de combustion : 45h. Pot en verre réutilisable.',                   'price'=>10500,  'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1602928321679-560bb453f190?q=80&w=400', 'stock'=>20, 'rating'=>4.5, 'is_new'=>false, 'category'=>'Bien-être',   'cat_slug'=>'bien-etre'],
+    ['id'=>1,  'shop_id'=>1, 'name'=>'Fauteuil et table',        'description'=>'Fauteuil et table en bois massif, design moderne et confortable.',  'price'=>30000,  'old_price'=>null,  'image'=>'../Img/Deco 4.jpeg', 'stock'=>12, 'rating'=>4.8, 'is_new'=>true,  'category'=>'Décoration',  'cat_slug'=>'decoration'],
+    ['id'=>2,  'shop_id'=>1, 'name'=>'Chaise et table',     'description'=>'Chaise et table en bois massif, design moderne et confortable.', 'price'=>25000,  'old_price'=>15500, 'image'=>'../Img/Déco 3.jpeg ', 'stock'=>8,  'rating'=>4.6, 'is_new'=>false, 'category'=>'Décoration',   'cat_slug'=>'decoration'],
+    ['id'=>3,  'shop_id'=>1, 'name'=>'Matelas',    'description'=>'Matelas en mousse viscoélastique, design moderne et confortable.', 'price'=>26500,  'old_price'=>null,  'image'=>'../Img/Deco 2.jpeg', 'stock'=>5,  'rating'=>4.9, 'is_new'=>false, 'category'=>'Décoration',  'cat_slug'=>'decoration'],
+    ['id'=>4,  'shop_id'=>1, 'name'=>'Réfrigérateur',      'description'=>'Réfrigérateur en acier inoxydable, design moderne et fonctionnel.', 'price'=>32000,  'old_price'=>null,  'image'=>'../Img/Dive 3.jpeg', 'stock'=>3,  'rating'=>5.0, 'is_new'=>true,  'category'=>'Décoration',  'cat_slug'=>'decoration'],
+    ['id'=>5,  'shop_id'=>1, 'name'=>'Filtre à eau',  'description'=>'Filtre à eau en plastique recyclé, design moderne et fonctionnel.',    'price'=>23500,  'old_price'=>28000, 'image'=>'../Img/Dive 4.jpeg', 'stock'=>15, 'rating'=>4.7, 'is_new'=>false, 'category'=>'Décoration',   'cat_slug'=>'decoration'],
+
 
     /* ── Produits Boutique 2 : Atelier du Fil ───────────────────────── */
-    ['id'=>7,  'shop_id'=>2, 'name'=>'Écharpe tissée à la main',    'description'=>'Écharpe en laine mérinos filée à la main, motifs géométriques inspirés des traditions Kongo. 180 × 32 cm. Teintes naturelles (indigo, ocre, blanc). Douce et résistante.',                          'price'=>41500,  'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=400', 'stock'=>7,  'rating'=>4.9, 'is_new'=>true,  'category'=>'Accessoires', 'cat_slug'=>'accessoires'],
-    ['id'=>8,  'shop_id'=>2, 'name'=>'Sac fourre-tout en lin',      'description'=>'Grand sac en lin naturel non blanchi, poignées en corde tressée. Compartiment intérieur avec zip. Dimensions : 40×38 cm. Lavable en machine à 30°C. Fabriqué localement.',                           'price'=>22000,  'old_price'=>28500, 'image'=>'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=400', 'stock'=>9,  'rating'=>4.7, 'is_new'=>false, 'category'=>'Maroquinerie','cat_slug'=>'maroquinerie'],
-    ['id'=>9,  'shop_id'=>2, 'name'=>'Pull en alpaga naturel',      'description'=>'Pull oversize en alpaga péruvien 100% naturel, col rond légèrement tombant. Tissu ultra-doux, antiallergique. Disponible en S/M/L/XL. Coloris naturel non teint. Certification GOTS.',             'price'=>63000,  'old_price'=>75000, 'image'=>'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=400', 'stock'=>6,  'rating'=>4.6, 'is_new'=>false, 'category'=>'Vêtements',   'cat_slug'=>'vetements'],
-    ['id'=>10, 'shop_id'=>2, 'name'=>'Nappe tissée traditionnelle', 'description'=>'Nappe en coton tissé au métier à bras, motifs symboliques du Royaume Kongo. Dimensions : 140×200 cm. Coloris naturels résistants au lavage. Idéale pour les grandes occasions.',                    'price'=>35000,  'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=400', 'stock'=>4,  'rating'=>4.8, 'is_new'=>true,  'category'=>'Maison',      'cat_slug'=>'maison'],
+    ['id'=>7,  'shop_id'=>2, 'name'=>'Sac Louis',    'description'=>'Sac à main en tissu local, design moderne et fonctionnel.', 'price'=>41500,  'old_price'=>null,  'image'=>'../Img/Sac Louis.jpeg', 'stock'=>7,  'rating'=>4.9, 'is_new'=>true,  'category'=>'Accessoires', 'cat_slug'=>'accessoires'],
+    ['id'=>8,  'shop_id'=>2, 'name'=>'Sac fourre-tout en lin',      'description'=>'Grand sac en lin naturel non blanchi, poignées en corde tressée. Compartiment intérieur avec zip. Dimensions : 40×38 cm. Lavable en machine à 30°C. Fabriqué localement.',                           'price'=>22000,  'old_price'=>28500, 'image'=>'../Img/Sac fourre-tout en lin.jpeg', 'stock'=>9,  'rating'=>4.7, 'is_new'=>false, 'category'=>'Maroquinerie','cat_slug'=>'maroquinerie'],
+    ['id'=>9,  'shop_id'=>2, 'name'=>'Pull en alpaga naturel',      'description'=>'Pull oversize en alpaga péruvien 100% naturel, col rond légèrement tombant. Tissu ultra-doux, antiallergique. Disponible en S/M/L/XL. Coloris naturel non teint. Certification GOTS.',             'price'=>63000,  'old_price'=>75000, 'image'=>'../Img/Pull.jpeg', 'stock'=>6,  'rating'=>4.6, 'is_new'=>false, 'category'=>'Vêtements',   'cat_slug'=>'vetements'],
+    ['id'=>10, 'shop_id'=>2, 'name'=>'Nappe tissée traditionnelle', 'description'=>'Nappe en coton tissé au métier à bras, motifs symboliques du Royaume Kongo. Dimensions : 140×200 cm. Coloris naturels résistants au lavage. Idéale pour les grandes occasions.',                    'price'=>35000,  'old_price'=>null,  'image'=>'../Img/Tissu.jpeg', 'stock'=>4,  'rating'=>4.8, 'is_new'=>true,  'category'=>'Maison',      'cat_slug'=>'maison'],
 
     /* ── Produits Boutique 3 : Les Épices Dorées ────────────────────── */
     ['id'=>11, 'shop_id'=>3, 'name'=>'Mélange 7 épices du Congo',   'description'=>'Blend exclusif de 7 épices sélectionnées en RDC et au Congo-Brazzaville. Notes fumées, florales et légèrement piquantes. Bocal en verre hermétique 100g. Idéal pour les viandes et poissons.',    'price'=>8500,   'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400', 'stock'=>30, 'rating'=>5.0, 'is_new'=>true,  'category'=>'Épices',      'cat_slug'=>'epices'],
@@ -231,6 +249,16 @@ $PRODUCTS_DATA = [
     ['id'=>22, 'shop_id'=>6, 'name'=>'Mocassin cuir femme tressé',  'description'=>'Mocassin élégant en cuir de chèvre souple, tressage artisanal sur le dessus. Semelle caoutchouc antidérapante. Doublure cuir intérieure. Pointures 36 à 42. Coloris : camel, noir, cognac.',     'price'=>78000,  'old_price'=>88000, 'image'=>'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=400', 'stock'=>9,  'rating'=>4.8, 'is_new'=>true,  'category'=>'Femme',       'cat_slug'=>'femme'],
     ['id'=>23, 'shop_id'=>6, 'name'=>'Sandales cuir tressé unisexe','description'=>'Sandales plates en lanières de cuir naturel tressées à la main. Semelle cuir épais 4mm. Bride de cheville réglable. Unisexe, pointures 37 à 45. Conçues pour l\'été congolais.',                'price'=>42000,  'old_price'=>null,  'image'=>'https://images.unsplash.com/photo-1603487742131-4160ec999306?q=80&w=400', 'stock'=>14, 'rating'=>4.7, 'is_new'=>false, 'category'=>'Sandales',    'cat_slug'=>'sandales'],
     ['id'=>24, 'shop_id'=>6, 'name'=>'Ceinture cuir gravée main',   'description'=>'Ceinture en cuir pleine fleur 3mm d\'épaisseur, gravures décoratives réalisées à la main. Boucle laiton massif. Largeur 3,5 cm. Longueurs sur commande. Coloris naturel, marron ou noir.',       'price'=>28500,  'old_price'=>32000, 'image'=>'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?q=80&w=400', 'stock'=>16, 'rating'=>4.6, 'is_new'=>false, 'category'=>'Accessoires', 'cat_slug'=>'accessoires'],
+
+    /* ── Produits Boutique 7 : Maiso des souliers ─────────────────────────── */
+    ['id'=>25, 'shop_id'=>7, 'name'=>'Casquette',    'description'=>'Casquette en tissu respirant, idéale pour les journées en plein air. Design simple et élégant.',               'price'=>9000,  'old_price'=>null,  'image'=>'../Img/Casquette.jpeg', 'stock'=>15,  'rating'=>4.9, 'is_new'=>false, 'category'=>'Mixte',       'cat_slug'=>'homme'],
+    ['id'=>26, 'shop_id'=>7, 'name'=>'Jordan',  'description'=>'Chaussures de sport en cuir respirant, idéales pour les entraînements et les sorties. Pointures 36 à 42. Coloris : camel, noir, cognac.',     'price'=>15000,  'old_price'=>25000, 'image'=>'../Img/chemtov.jpeg', 'stock'=>9,  'rating'=>4.8, 'is_new'=>true,  'category'=>'Femme',       'cat_slug'=>'femme'],
+    ['id'=>27, 'shop_id'=>7, 'name'=>'Survêtement','description'=>'Tenue de sport en tissu respirant, idéale pour les entraînements et les sorties. . Coloris : camel, noir, cognac.',  'price'=>12000,  'old_price'=>null,  'image'=>'../Img/Pull.jpeg', 'stock'=>14, 'rating'=>4.7, 'is_new'=>false, 'category'=>'Sandales',    'cat_slug'=>'sandales'],
+    ['id'=>28, 'shop_id'=>7, 'name'=>'T-shirt',   'description'=>'T-shirt en coton respirant, idéal pour les journées en plein air. Design simple et élégant.',       'price'=>7500,  'old_price'=>null, 'image'=>'../Img/Tish 1.jpeg', 'stock'=>16, 'rating'=>4.6, 'is_new'=>false, 'category'=>'Vêtements', 'cat_slug'=>'vetements'],
+    ['id'=>29, 'shop_id'=>7, 'name'=>'Chaussures',   'description'=>'Chaussures, idéales pour les sorties. Pointures 36 à 42.',       'price'=>28500,  'old_price'=>32000, 'image'=>'../Img/Paies 2.jpeg', 'stock'=>16, 'rating'=>4.6, 'is_new'=>false, 'category'=>'Accessoires', 'cat_slug'=>'accessoires'],    
+    ['id'=>30, 'shop_id'=>7, 'name'=>'T-shirt',   'description'=>'T-shirt en coton respirant, idéal pour les journées en plein air. Design simple et élégant.',       'price'=>7500,  'old_price'=>null, 'image'=>'../Img/Tish 2.jpeg', 'stock'=>16, 'rating'=>4.6, 'is_new'=>false, 'category'=>'Vêtements', 'cat_slug'=>'vetements'],
+    ['id'=>31, 'shop_id'=>7, 'name'=>'T-shirt',   'description'=>'T-shirt en coton respirant, idéal pour les journées en plein air. Design simple et élégant.',       'price'=>7500,  'old_price'=>null, 'image'=>'../Img/Tish 3.jpeg', 'stock'=>16, 'rating'=>4.6, 'is_new'=>false, 'category'=>'Vêtements', 'cat_slug'=>'vetements'],
+
 ];
 
 

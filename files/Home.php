@@ -82,7 +82,7 @@ include '../Includes/Header.php';
 
             <!-- Visuel gauche -->
             <div class="about__visual reveal">
-                <img src="../Img/Index.jpeg"
+                <img src="../Img/Statio.jpeg"
                      alt="À propos de la marketplace">
                 <div class="about__badge">✦ Sécurisé</div>
             </div>

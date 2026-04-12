@@ -6,11 +6,11 @@
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-    header('Location: ../Login & Register/Login.php');
+    header('Location: ../Int_Clients/Home.php');
     exit();
 }
 
-$redirect = htmlspecialchars($_GET['redirect_to'] ?? '../Login & Register/Login.php', ENT_QUOTES);
+$redirect = htmlspecialchars($_GET['redirect_to'] ?? '../Int_Clients/Home.php', ENT_QUOTES);
 $error    = $_SESSION['auth_error']   ?? '';
 $success  = $_SESSION['auth_success'] ?? '';
 unset($_SESSION['auth_error'], $_SESSION['auth_success']);
@@ -53,7 +53,7 @@ unset($_SESSION['auth_error'], $_SESSION['auth_success']);
                 <p class="auth-visual__sub">
                     Parcourez librement les boutiques de nos artisans. Connectez-vous pour commander, suivre vos achats et écrire aux vendeurs.
                 </p>
-                <a href="../files/Home.php" class="auth-guest-link">
+                <a href="../Int_Clients/Home.php" class="auth-guest-link">
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     Continuer sans compte
                 </a>
@@ -153,7 +153,7 @@ unset($_SESSION['auth_error'], $_SESSION['auth_success']);
 
             <p class="auth-switch">
                 Pas encore de compte ?
-                <a href="./Register.php<?php echo ($redirect !== '../files/Home.php') ? '?redirect_to='.urlencode($redirect) : ''; ?>">
+                <a href="./Register.php<?php echo ($redirect !== '../Int_Clients/Home.php') ? '?redirect_to='.urlencode($redirect) : ''; ?>">
                     Créer un compte gratuitement
                 </a>
             </p>

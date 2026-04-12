@@ -37,6 +37,7 @@ include '../Includes/Header.php';
 <link rel="stylesheet" href="../assets/Css/Shop_Css/Shop-detail.css">
 <link rel="stylesheet" href="../assets/Css/Shop_Css/responsive-shop-detail.css">
 <link rel="stylesheet" href="../assets/Css/fix-overflow.css">
+<link rel="stylesheet" href="../assets/Css/Home_Css/global.css">
 
 <!-- Styles inline pour les éléments d'invitation à la connexion -->
 <style>
@@ -315,7 +316,8 @@ include '../Includes/Header.php';
         </p>
     </div>
 
-    <div class="products-grid reveal-group" id="products-grid">
+    <div class="products-grid reveal-group" id="products-grid"
+             data-register-url="<?php echo '../Auth/Register.php?redirect_to=' . urlencode('Shop-detail.php?id=' . $shop_id); ?>">
 
         <?php if (empty($products)): ?>
         <div class="products-empty">
@@ -393,8 +395,8 @@ include '../Includes/Header.php';
                            ───────────────────────────────────────────────────── */
                         $isLoggedIn   = isset($_SESSION['user_id']);
                         $currentUrl   = 'Shop-detail.php?id=' . $shop_id;
-                        $registerUrl  = '../Login & Register/Register.php?redirect_to=' . urlencode($currentUrl);
-                        $loginUrl     = '../Login & Register/Login.php?redirect_to='    . urlencode($currentUrl);
+                        $registerUrl  = '../Auth/Register.php?redirect_to=' . urlencode($currentUrl);
+                        $loginUrl     = '../Auth/Login.php?redirect_to='    . urlencode($currentUrl);
                         ?>
                         <?php if ($isOutOfStock): ?>
                             <!-- Rupture de stock : bouton désactivé -->
@@ -484,8 +486,8 @@ include '../Includes/Header.php';
    Elle invite à créer un compte ou se connecter pour commander.   */
 if (!isset($_SESSION['user_id'])):
     $currentUrl  = 'Shop-detail.php?id=' . $shop_id;
-    $registerUrl = '../Login & Register/Register.php?redirect_to=' . urlencode($currentUrl);
-    $loginUrl    = '../Login & Register/Login.php?redirect_to='    . urlencode($currentUrl);
+    $registerUrl = '../Auth/Register.php?redirect_to=' . urlencode($currentUrl);
+    $loginUrl    = '../Auth/Login.php?redirect_to='    . urlencode($currentUrl);
 ?>
 <div class="guest-order-banner" id="guest-banner" role="complementary" aria-label="Invitation à créer un compte">
     <div class="guest-order-banner__text">
